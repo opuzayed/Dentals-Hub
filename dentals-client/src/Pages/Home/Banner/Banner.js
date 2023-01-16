@@ -3,7 +3,7 @@ import chair from '../../../assets/images/chair.png';
 import bgchair from '../../../assets/images/bg.png';
 const Banner = () => {
     return (
-        <div className="hero bg-no-repeat bg-cover bg-center rounded-lg" style={{backgroundImage: `url(${bgchair})`}}>
+        <div className="hero bg-no-repeat bg-cover bg-center rounded-lg mt-5" style={{backgroundImage: `url(${bgchair})`}}>
         <div className="hero-content rounded-lg flex-col lg:flex-row-reverse">
           <img src={chair} className="w-1/2 rounded-lg shadow-2xl" alt='chair figure'/>
           <div>
