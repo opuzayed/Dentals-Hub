@@ -11,7 +11,9 @@ const Navbar = () => {
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/reviews'>Reviews</Link></li>
         <li><Link to='/login'>Login</Link></li>
-        <li><ToogleSwitcher></ToogleSwitcher></li>
+        <li><div>
+        <ToogleSwitcher></ToogleSwitcher>
+        </div></li>
        </>
   return (
       <div className="navbar bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-medium rounded-lg flex justify-between">
@@ -40,13 +42,14 @@ const Navbar = () => {
                 {menuItems}
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl"><img className="w-14 px-2 rounded-xxl" src={logoden} alt='Teeth logo'></img> <span className="text-xl font-bold text-lime-700 italic">Dentals <span className="text-red-400">Point</span></span></Link>
+          <Link to='/' className="btn btn-ghost normal-case text-xl"><img className="w-14 px-2 rounded-xxl" src={logoden} alt='Teeth logo'></img> <span className="text-xl font-bold text-lime-400 italic">Dental <span className="text-black">Point</span></span></Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {
                 menuItems
             }
+            
           </ul>
         </div>
       </div>
