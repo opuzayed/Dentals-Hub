@@ -29,7 +29,7 @@ const InfoCards = () => {
         }
     ]
     return (
-        <div className='grid gap-6 mt-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid gap-6 mt-5 md:grid-cols-2 lg:grid-cols-3'>
             {
                dentalInfos.map(dentalInfo => <InfoCard
                key={dentalInfo.id}
