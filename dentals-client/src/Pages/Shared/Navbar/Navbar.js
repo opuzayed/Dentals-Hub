@@ -18,7 +18,10 @@ const Navbar = () => {
   return (
       <div className="navbar bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-medium rounded-lg flex justify-between">
         <div className="navbar-start">
-          <div className="dropdown">
+          <Link to='/' className="btn btn-ghost normal-case text-xl"><img className="w-14 px-2 rounded-xxl" src={logoden} alt='Teeth logo'></img> <span className="text-xl font-bold text-lime-400 italic">Dental <span className="text-black">Point</span></span></Link>
+        </div>
+        <div className="navbar-end">
+        <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,9 +45,8 @@ const Navbar = () => {
                 {menuItems}
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl"><img className="w-14 px-2 rounded-xxl" src={logoden} alt='Teeth logo'></img> <span className="text-xl font-bold text-lime-400 italic">Dental <span className="text-black">Point</span></span></Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-end hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {
                 menuItems

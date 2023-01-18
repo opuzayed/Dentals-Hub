@@ -36,7 +36,7 @@ const ContactUs = () => {
                     <div className="form-control w-full max-w-xs">
                     <textarea {...register("message")} className="textarea textarea-bordered text-black" placeholder="Your Message"></textarea>
                     </div>
-                    <div className="mt-9 w-32 mx-auto"><PrimaryButton>Submit</PrimaryButton></div>
+                    <div className="mt-9 w-32 mx-auto"><PrimaryButton size='lg'>Submit</PrimaryButton></div>
                     {contactFormError && <p className='text-error'>{contactFormError}</p>}
                 </form>
         </div>
