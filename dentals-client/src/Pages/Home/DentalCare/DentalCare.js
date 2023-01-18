@@ -1,5 +1,6 @@
 import React from "react";
 import treatment from '../../../assets/images/treatment.png';
+import PrimaryButton from "../../../Components/PrimaryButton/PrimaryButton";
 const DentalCare = () => {
   return (
     <div className="hero mt-5">
@@ -10,7 +11,7 @@ const DentalCare = () => {
     <div className='md:w-1/2'>
       <h1 className="text-5xl font-bold ">Exceptional Dental <br /> Care, on Your Terms</h1>
       <p className="py-6">Learn how to keep your mouth healthy and happy all day long. Don't let poor oral health ruin your beautiful smile. </p>
-      <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">Get Started</button>
+      <PrimaryButton>Get Started</PrimaryButton>
     </div>
   </div>
 </div>
