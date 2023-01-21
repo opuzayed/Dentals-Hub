@@ -9,11 +9,12 @@ const BookingModal = ({treatment, dateSelected}) => {
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
+        const slot = form.slot.value;
         const fullName = form.name.value;
         const email = form.email.value;
         const phoneNumber = form.phone.value;
 
-        console.log(date, fullName, email, phoneNumber);
+        console.log(date,slot, fullName, email, phoneNumber);
     }
 
   return (
