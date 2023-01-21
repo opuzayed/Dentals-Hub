@@ -6,7 +6,7 @@ const AppointmentBanner = ({dateSelected,setDateSelected}) => {
     
   return (
     <header className="mt-5">
-      <div className="hero bg-no-repeat bg-cover bg-center rounded-lg"  style={{backgroundImage: `url(${bgchair})`}}>
+      <div className="hero bg-no-repeat bg-cover bg-center rounded-lg" style={{backgroundImage: `url(${bgchair})`}}>
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src={chair}

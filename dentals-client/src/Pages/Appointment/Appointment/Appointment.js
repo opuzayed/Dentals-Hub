@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AppointmentBanner from '../AppointmentBanner/AppointmentBanner';
 import AvailableAppointments from "../AvailableAppointments/AvailableAppointments";
 
@@ -9,7 +8,8 @@ const Appointment = () => {
     
     return (
         <div>
-           <AppointmentBanner dateSelected={dateSelected} setDateSelected={setDateSelected}></AppointmentBanner>
+           <AppointmentBanner dateSelected={dateSelected} 
+           setDateSelected={setDateSelected}></AppointmentBanner>
            <AvailableAppointments dateSelected={dateSelected}></AvailableAppointments> 
         </div>
     );

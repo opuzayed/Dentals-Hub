@@ -6,11 +6,11 @@ import Login from "../../Pages/Login/Login";
 
 export const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Main></Main>,
       children: [
         {
-          path:"/",
+          path:'/',
           element:<Home></Home>,
         },
         {
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
           element:<Appointment></Appointment>
         },
         {
-          path:"/login",
+          path:'/login',
           element:<Login></Login>,
         },
       ],
