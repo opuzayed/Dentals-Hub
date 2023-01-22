@@ -10,11 +10,20 @@ const BookingModal = ({treatment, dateSelected}) => {
         event.preventDefault();
         const form = event.target;
         const slot = form.slot.value;
-        const fullName = form.name.value;
+        const patientName = form.name.value;
         const email = form.email.value;
         const phoneNumber = form.phone.value;
 
-        console.log(date,slot, fullName, email, phoneNumber);
+        const booking = {
+            appointmentDate : date,
+            treatment : name,
+            patientName,
+            slot,
+            email,
+            phoneNumber
+        }
+        console.log(booking);
+        
     }
 
   return (
@@ -35,7 +44,10 @@ const BookingModal = ({treatment, dateSelected}) => {
                 <input type="text" value={date} disabled className="input input-bordered w-full" />
                 <select name='slot' className="select select-bordered w-full">
                     {
-                        slots.map(slot => <option value={slot}>{slot}</option>)
+                        slots.map((slot, i) => <option 
+                        key={i}
+                        value={slot}
+                        >{slot}</option>)
                     }
                 </select>
                     <input name='name' type="text" className="input input-bordered w-full" placeholder="Full Name" />
