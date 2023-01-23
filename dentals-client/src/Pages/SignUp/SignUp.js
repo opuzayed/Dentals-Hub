@@ -18,7 +18,6 @@ const SignUp = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-                
             }
     return (
         <div className='h-[800px] shadow-2xl flex justify-center items-center'>

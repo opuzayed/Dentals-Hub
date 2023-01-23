@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logoden from '../../../assets/images/logoden.png';
 import ToogleSwitcher from "../../../Components/ToogleSwitcher/ToogleSwitcher";
+import { AuthContext } from "../../../contexts/AuthProvider";
 const Navbar = () => {
+  const {user} = useContext(AuthContext);
     const menuItems = 
        <>
         <li><Link to='/'>
@@ -10,8 +12,15 @@ const Navbar = () => {
         <li><Link to='/appointment'>Appointment</Link></li>
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/reviews'>Reviews</Link></li>
-        <li><Link to='/login'>Login</Link></li>
-        <li><Link to='/signup'>Sign Up</Link></li>
+        {
+            user?.uid ?
+            <li><Link to='/'>Sign Out</Link></li>
+            :
+          <>
+            <li><Link to='/login'>Sign In</Link></li>
+            <li><Link to='/signup'>Sign Up</Link></li>
+          </>
+        }
         <li><div>
         <ToogleSwitcher></ToogleSwitcher>
         </div></li>

@@ -1,11 +1,24 @@
+import { useContext } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const {register, formState: { errors }, handleSubmit} = useForm();
-
+    const {signIn} = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
+ 
     const handleLogin = data => {
-        console.log(data);
+        setLoginError('');
+        signIn(data.email, data.password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+          })
+          .catch((error) => {
+            setLoginError(error.message);
+          });
     }
     
     return (
@@ -24,6 +37,9 @@ const Login = () => {
                     {errors.password && <p className='text-error text-center'>{errors.password?.message}</p>}
                 </div>
                 <input className='btn btn-accent w-full mt-5' type="submit" value="Login" />
+                <div>
+                    {loginError && <p className='text-error text-center'>Your email or password is wrong</p>}
+                </div>
                 </form>
                 <p className='text-center'>New to Dental Point? <Link className='text-secondary' to='/signup'>Create a new account</Link></p>
                 <div className="divider">OR</div>
