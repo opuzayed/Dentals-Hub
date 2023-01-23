@@ -28,7 +28,8 @@ const SignUp = () => {
                     <input type="password" {...register("password",
                     { required: "Password is required",
                     minLength:{ value: 6, message: "Password must be at least six characters" },
-                    maxLength:{ value: 10, message: "Password maximum ten characters" } 
+                    maxLength:{ value: 10, message: "Password maximum ten characters" },
+                    pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' } 
                     }
                     )} className="input input-bordered w-full max-w-xs" />
                     {errors.password && <p className='text-error text-center'>{errors.password?.message}</p>}
