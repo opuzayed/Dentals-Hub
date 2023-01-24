@@ -1,22 +1,35 @@
 import React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 
 const SignUp = () => {
             const {register, handleSubmit, formState: { errors }} = useForm();
-            const {createUser} = useContext(AuthContext);
+            const {createUser, updateUser} = useContext(AuthContext);
+            const [signUpError, setSignUpError] = useState('');
+
             const handleSignUp = data => {
+                setSignUpError('');
                 console.log(data);
                 createUser(data.email, data.password)
                 .then(result => {
                     const user = result.user;
                     console.log(user);
-                  })
+                    toast.success('user created successfully');
+                 const userInfo = {
+                        displayName : data.name
+                    }
+                    updateUser(userInfo)
+                    .then(() => {})
+                    .catch((error) => {});
+                    })
                   .catch((error) => {
                     console.error(error);
+                    setSignUpError(error.message);
                   });
             }
     return (
@@ -46,6 +59,11 @@ const SignUp = () => {
                     {errors.password && <p className='text-error text-center'>{errors.password?.message}</p>}
                 </div>
                 <input className='btn btn-accent w-full mt-5' type="submit" value="Sign Up" />
+                <div>
+                    {
+                        signUpError && <p className='text-error text-center'>Email already in used</p>
+                    }
+                </div>
                 </form>
                 <p className='text-center'>Already have an account? <Link className='text-secondary' to='/login'>Please Login</Link></p>
                 <div className="divider">OR</div>
