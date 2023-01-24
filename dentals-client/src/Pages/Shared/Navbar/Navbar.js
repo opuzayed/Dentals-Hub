@@ -4,7 +4,14 @@ import logoden from '../../../assets/images/logoden.png';
 import ToogleSwitcher from "../../../Components/ToogleSwitcher/ToogleSwitcher";
 import { AuthContext } from "../../../contexts/AuthProvider";
 const Navbar = () => {
-  const {user} = useContext(AuthContext);
+  const {user, logOut} = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+    .then(() => {})
+    .catch((error) => {});
+    }
+
     const menuItems = 
        <>
         <li><Link to='/'>
@@ -14,7 +21,7 @@ const Navbar = () => {
         <li><Link to='/reviews'>Reviews</Link></li>
         {
             user?.uid ?
-            <li><Link to='/'>Sign Out</Link></li>
+            <li><button onClick={handleLogOut}>Sign Out</button></li>
             :
           <>
             <li><Link to='/login'>Sign In</Link></li>
