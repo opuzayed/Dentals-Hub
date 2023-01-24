@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -6,8 +7,9 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const {register, formState: { errors }, handleSubmit} = useForm();
-    const {signIn} = useContext(AuthContext);
+    const {signIn, providerLogin} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
+    const googleProvider = new GoogleAuthProvider();
     let navigate = useNavigate();
     let location = useLocation();
 
@@ -19,12 +21,26 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             console.log(user);
-            navigate(from, { replace: true });
+            navigate(from, {to:'/'}, { replace: true });
           })
           .catch((error) => {
             setLoginError(error.message);
           });
     }
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+        .then((result) => {
+            const user = result.user;
+           console.log(user);
+           navigate(from, { replace: true });
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoginError(error.message);
+          });
+    }
+
     
     return (
         <div className='h-[800px] shadow-2xl flex justify-center items-center'>
@@ -48,7 +64,7 @@ const Login = () => {
                 </form>
                 <p className='text-center'>New to Dental Point? <Link className='text-secondary' to='/signup'>Create a new account</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
