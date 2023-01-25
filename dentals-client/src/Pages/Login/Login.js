@@ -8,7 +8,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const {register, formState: { errors }, handleSubmit} = useForm();
-    const {signIn, providerLogin} = useContext(AuthContext);
+    const {signIn, providerLogin, setLoading} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const googleProvider = new GoogleAuthProvider();
     let navigate = useNavigate();
@@ -34,7 +34,10 @@ const Login = () => {
             .catch((error) => 
             {
                 setLoginError(error.message);
-            });
+            })
+            .finally(() => {
+                setLoading(false);
+            })
     }
 
     const handleGoogleSignIn = () => {
@@ -42,16 +45,13 @@ const Login = () => {
         providerLogin(googleProvider)
         .then((result) => {
             const user = result.user;
-           
             navigate(from, {to:'/'}, { replace: true });
-          
           })
           .catch((error) => {
             console.log(error);
             setLoginError(error.message);
           });
     }
-
     
     return (
         <div className='h-[800px] shadow-2xl flex justify-center items-center'>
