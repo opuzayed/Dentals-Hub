@@ -12,5 +12,5 @@ app.get('/', async (req, res) => {
   });
   
 app.listen(port, () => {
-console.log(`Dental point server is running on ${port}`);
+console.log(`Dental point server is running on ${port} port`);
 });
