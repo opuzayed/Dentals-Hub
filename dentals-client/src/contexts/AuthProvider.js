@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { createContext } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, signInWithPopup, sendEmailVerification } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, signInWithPopup, sendEmailVerification, sendPasswordResetEmail  } from "firebase/auth";
 import app from './../Firebase/Firebase.config';
 import { useState } from 'react';
 
@@ -34,6 +34,10 @@ const AuthProvider = ({children}) => {
         return sendEmailVerification(auth.currentUser);
     }
 
+    const setForgetPassword = (userEmail) => {
+       return sendPasswordResetEmail(auth, userEmail);
+    }
+
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
@@ -59,6 +63,7 @@ const AuthProvider = ({children}) => {
         providerLogin,
         updateUser,
         verifyEmail,
+        setForgetPassword,
         logOut,
         user,
         loading,
