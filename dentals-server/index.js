@@ -12,17 +12,25 @@ app.use(express.json());
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.rsulfhn.mongodb.net/?retryWrites=true&w=majority`;
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
   try{
       const appointOptionCollection = client.db("dentalPoint").collection("appointmentOptions");
-    
+      const bookingsCollection = client.db('dentalPoint').collection('bookings');
+
       app.get('/appointmentOptions', async(req, res) => {
         const query = {};
         const options = await appointOptionCollection.find(query).toArray();
         res.send(options);
       });
+
+      app.post('/bookings', async(req, res) => {
+        const booking = req.body;
+        const result = await bookingsCollection.insertOne(booking);
+        res.send(result);
+      })
 
   }
   finally{
