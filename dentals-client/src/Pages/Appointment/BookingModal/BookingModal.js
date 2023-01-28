@@ -1,10 +1,13 @@
 import { format } from "date-fns";
-import React from "react";
+import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 
-const BookingModal = ({treatment, dateSelected}) => {
+const BookingModal = ({treatment, dateSelected, setTreatment}) => {
     const {name, slots} = treatment;
     const date = format(dateSelected, 'PP');
+    const {user} = useContext(AuthContext);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -22,7 +25,22 @@ const BookingModal = ({treatment, dateSelected}) => {
             email,
             phoneNumber
         }
-        console.log(booking);
+        fetch('http://localhost:5000/bookings', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(booking)
+      })
+      .then(res => res.json())
+      .then(data =>{
+        console.log(data);
+       if(data.acknowledged)
+       {
+        setTreatment(null);
+        toast.success('Booking Confirmed Successfully');
+       }
+      })
         
     }
 
@@ -50,8 +68,8 @@ const BookingModal = ({treatment, dateSelected}) => {
                         >{slot}</option>)
                     }
                 </select>
-                    <input name='name' type="text" className="input input-bordered w-full" placeholder="Full Name" />
-                    <input name='email' type="email" className="input input-bordered w-full" placeholder="Email"/>
+                    <input name='name' type="text" defaultValue={user?.displayName} disabled className="input input-bordered w-full" placeholder="Full Name" />
+                    <input name='email' type="email" defaultValue={user?.email} disabled className="input input-bordered w-full" placeholder="Email"/>
                     <input name='phone' type="text" className="input input-bordered w-full" placeholder='Phone Number'/>
                     <input type="submit" className="btn btn-accent w-full" value="Submit" />
             </form>

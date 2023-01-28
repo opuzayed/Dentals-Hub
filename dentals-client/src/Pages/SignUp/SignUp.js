@@ -24,7 +24,6 @@ const SignUp = () => {
 
   const handleSignUp = (data) => {
     setSignUpError("");
-    console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
@@ -35,7 +34,9 @@ const SignUp = () => {
           displayName: data.name,
         };
         updateUser(userInfo)
-          .then(() => {})
+          .then(() => {
+          navigate('/');
+          })
           .catch((error) => {});
       })
       .catch((error) => {

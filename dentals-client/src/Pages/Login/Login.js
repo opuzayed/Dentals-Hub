@@ -8,9 +8,10 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const {register, formState: { errors }, handleSubmit} = useForm();
-    const {signIn, providerLogin, setLoading, setForgetPassword} = useContext(AuthContext);
+    //setForgetPassword
+    const {signIn, providerLogin, setLoading} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
-    const [clientEmail, setClientEmail] = useState('');
+    //const [clientEmail, setClientEmail] = useState('');
     const googleProvider = new GoogleAuthProvider();
     let navigate = useNavigate();
     let location = useLocation();
@@ -54,29 +55,29 @@ const Login = () => {
           });
     }
 
-    const onBlur = (event) =>
-    {
-        const email = event.target.value;
-        setClientEmail(email);
-        console.log(email);
+    // const onBlur = (event) =>
+    // {
+    //     const email = event.target.value;
+    //     setClientEmail(email);
+    //     console.log(email);
         
-    }
+    // }
 
-    const handleForgetPassword = () => 
-    {
-        if(!clientEmail)
-        {
-            toast('Please enter your valid email.');
-            return;
-        }
-        setForgetPassword(clientEmail)
-        .then(() => {
-            toast.success('Password reset email is send.Please check your inbox or spam folder of your email');
-        })
-          .catch((error) => {
-            console.error(error);
-          });
-    }
+    // const handleForgetPassword = () => 
+    // {
+    //     if(!clientEmail)
+    //     {
+    //         toast('Please enter your valid email.');
+    //         return;
+    //     }
+    //     setForgetPassword(clientEmail)
+    //     .then(() => {
+    //         toast.success('Password reset email is send.Please check your inbox or spam folder of your email');
+    //     })
+    //       .catch((error) => {
+    //         console.error(error);
+    //       });
+    // }
     
     
     return (
@@ -86,14 +87,16 @@ const Login = () => {
                 <form onSubmit={handleSubmit(handleLogin)}>
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text text-xl font-medium">Email</span></label>
-                    <input onBlur={onBlur} type="email" {...register("email", { required: "Email Address is required"})} className="input dark:text-black input-bordered w-full max-w-xs" />
+                    {/* onBlur={onBlur}  */}
+                    <input type="email" {...register("email", { required: "Email Address is required"})} className="input dark:text-black input-bordered w-full max-w-xs" />
                     {errors.email && <p className='text-error text-center'>{errors.email?.message}</p>}
                 </div>
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text text-xl font-medium">Password</span></label>
                     <input type="password" {...register("password",{required: "Password is required"})} className="input dark:text-black input-bordered w-full max-w-xs" />
                     {errors.password && <p className='text-error text-center'>{errors.password?.message}</p>}
-                    <span><button onClick={handleForgetPassword} className="btn btn-link no-underline">Forget Password?</button></span>
+                    <span><button className="btn btn-link no-underline">Forgot Password?</button></span>
+                    {/* onClick={handleForgetPassword} */}
                 </div>
                 <input className='btn btn-accent w-full mt-5 text-xl font-medium' type="submit" value="Login" />
                 <div>
