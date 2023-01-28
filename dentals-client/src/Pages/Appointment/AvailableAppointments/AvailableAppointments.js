@@ -8,11 +8,12 @@ import AppointmentOption from './AppointmentOption';
 const AvailableAppointments = ({dateSelected}) => {
    
     const [treatment, setTreatment] = useState(null);
+    const date = format(dateSelected, 'PP');
 
     const {data:appointmentOptions=[]} = useQuery({
-        queryKey:'appointmentOptions',
+        queryKey:['appointmentOptions', date],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/appointmentOptions')
+            const res = await fetch(`http://localhost:5000/appointmentOptions?date=${date}`)
             const data = await res.json();
             return data;
           },

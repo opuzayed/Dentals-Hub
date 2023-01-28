@@ -5,7 +5,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 
 
 const BookingModal = ({treatment, dateSelected, setTreatment}) => {
-    const {name, slots} = treatment;
+    const {name: treatmentName, slots} = treatment;
     const date = format(dateSelected, 'PP');
     const {user} = useContext(AuthContext);
 
@@ -19,7 +19,7 @@ const BookingModal = ({treatment, dateSelected, setTreatment}) => {
 
         const booking = {
             appointmentDate : date,
-            treatment : name,
+            treatment : treatmentName,
             patientName,
             slot,
             email,
@@ -56,7 +56,7 @@ const BookingModal = ({treatment, dateSelected, setTreatment}) => {
             ✕
           </label>
           <h3 className="text-lg font-bold dark:text-black">
-            {name}
+            {treatmentName}
           </h3>
             <form onSubmit={handleSubmit} className = "grid grid-cols-1 gap-3 mt-10 dark:text-black">
                 <input type="text" value={date} disabled className="input input-bordered w-full" />
