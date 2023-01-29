@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import Spinner from '../../Shared/Spinner/Spinner';
 import BookingModal from '../BookingModal/BookingModal';
 import AppointmentOption from './AppointmentOption';
 
@@ -10,7 +11,7 @@ const AvailableAppointments = ({dateSelected}) => {
     const [treatment, setTreatment] = useState(null);
     const date = format(dateSelected, 'PP');
 
-    const {data:appointmentOptions=[]} = useQuery({
+    const {data:appointmentOptions=[], isLoading, refetch} = useQuery({
         queryKey:['appointmentOptions', date],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/appointmentOptions?date=${date}`)
@@ -18,6 +19,11 @@ const AvailableAppointments = ({dateSelected}) => {
             return data;
           },
         });
+
+        if(isLoading)
+        {
+            <Spinner></Spinner>
+        }
     
     return (
         <section className='mt-32'>
@@ -36,6 +42,7 @@ const AvailableAppointments = ({dateSelected}) => {
                 <BookingModal
             treatment = {treatment}
             setTreatment = {setTreatment}
+            refetch = {refetch}
             dateSelected = {dateSelected}
             ></BookingModal>}
         </section>
