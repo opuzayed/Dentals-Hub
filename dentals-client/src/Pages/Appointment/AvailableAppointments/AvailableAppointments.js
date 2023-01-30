@@ -22,7 +22,7 @@ const AvailableAppointments = ({dateSelected}) => {
 
         if(isLoading)
         {
-            <Spinner></Spinner>
+            return <Spinner></Spinner>
         }
     
     return (
