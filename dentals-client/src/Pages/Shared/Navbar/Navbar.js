@@ -37,6 +37,22 @@ const Navbar = () => {
   return (
       <div className="navbar bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-medium rounded-lg flex justify-between">
         <div className="navbar-start">
+        <label tabIndex={2} htmlFor="dashboard-drawer" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
           <Link to='/' className="btn btn-ghost normal-case text-xl"><img className="w-14 px-2 rounded-xxl" src={logoden} alt='Teeth logo'></img> <span className="text-xl font-bold text-lime-400 italic">Dental <span className="text-black">Point</span></span></Link>
         </div>
         <div className="navbar-end">
@@ -58,7 +74,7 @@ const Navbar = () => {
               </svg>
             </label>
             <ul
-              tabIndex={0}
+              tabIndex={1}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-teal-700 rounded-box w-52"
             >
                 {menuItems}
