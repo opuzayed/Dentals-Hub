@@ -37,7 +37,7 @@ const Navbar = () => {
   return (
       <div className="navbar bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-medium rounded-lg flex justify-between">
         <div className="navbar-start">
-        <label tabIndex={2} htmlFor="dashboard-drawer" className="btn btn-ghost lg:hidden">
+        <label tabIndex={0} htmlFor="dashboard-drawer" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -57,7 +57,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
         <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label tabIndex={1} className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -74,7 +74,7 @@ const Navbar = () => {
               </svg>
             </label>
             <ul
-              tabIndex={1}
+              tabIndex={2}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-teal-700 rounded-box w-52"
             >
                 {menuItems}
