@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const {
@@ -16,11 +17,18 @@ const SignUp = () => {
   const { createUser, updateUser, providerLogin, verifyEmail } =
     useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
+  const [userCreatedEmail, setUserCreatedEmail] = useState('');
+  const [token] = useToken(userCreatedEmail);
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
+
+  if(token)
+  {
+    navigate('/');
+  }
 
   const handleSignUp = (data) => {
     setSignUpError("");
@@ -76,25 +84,9 @@ const SignUp = () => {
     })
     .then(res => res.json())
     .then(data => {
-      getUserToken(email);
-     
+      setUserCreatedEmail(email);
     });
   }
-
-  const getUserToken = email => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
-        .then(res => res.json())
-        .then(data => {
-        if(data.accessToken)
-        {
-          localStorage.setItem('accessToken', data.accessToken)
-        }
-        });
-        navigate('/');
-  }
-
-
-
 
   return (
     <div className="h-[800px] shadow-2xl flex justify-center items-center">
