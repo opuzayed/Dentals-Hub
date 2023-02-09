@@ -5,6 +5,7 @@ import ToogleSwitcher from "../../../Components/ToogleSwitcher/ToogleSwitcher";
 import { AuthContext } from "../../../contexts/AuthProvider";
 const Navbar = () => {
   const {user, logOut} = useContext(AuthContext);
+console.log('nabvar user', user);
 
   const handleLogOut = () => {
     logOut()

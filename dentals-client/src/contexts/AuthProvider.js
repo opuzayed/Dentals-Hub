@@ -30,9 +30,9 @@ const AuthProvider = ({children}) => {
         return updateProfile(auth.currentUser, userInfo);
     }
 
-    const verifyEmail = () => {
-        return sendEmailVerification(auth.currentUser);
-    }
+    // const verifyEmail = () => {
+    //     return sendEmailVerification(auth.currentUser);
+    // }
 
     // const setForgetPassword = (userEmail) => {
     //    return sendPasswordResetEmail(auth, userEmail);
@@ -47,10 +47,11 @@ const AuthProvider = ({children}) => {
        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             
                
-                if(currentUser === null || currentUser.emailVerified)
-                {
-                    setUser(currentUser);
-                }
+            setUser(currentUser);
+                // if(currentUser === null || currentUser.emailVerified)
+                // {
+                //     setUser(currentUser);
+                // }
                             
                     setLoading(false);
           });
@@ -62,7 +63,7 @@ const AuthProvider = ({children}) => {
         signIn,
         providerLogin,
         updateUser,
-        verifyEmail,
+        //verifyEmail,
         // setForgetPassword,
         logOut,
         user,

@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
+//import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useToken from "../../hooks/useToken";
@@ -14,8 +14,9 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUser, providerLogin, verifyEmail } =
+  const { createUser, updateUser, providerLogin } =
     useContext(AuthContext);
+    //verifyEmail
   const [signUpError, setSignUpError] = useState("");
   const [userCreatedEmail, setUserCreatedEmail] = useState('');
   const [token] = useToken(userCreatedEmail);
@@ -36,8 +37,8 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        handleEmailVerification();
-        toast.success("Please verify your email address");
+        //handleEmailVerification();
+        //toast.success("Please verify your email address");
         const userInfo = {
           displayName: data.name,
         };
@@ -67,11 +68,11 @@ const SignUp = () => {
       });
   };
 
-  const handleEmailVerification = () => {
-    verifyEmail()
-      .then(() => {})
-      .catch((error) => console.error(error));
-  };
+  // const handleEmailVerification = () => {
+  //   verifyEmail()
+  //     .then(() => {})
+  //     .catch((error) => console.error(error));
+  // };
 
   const saveUser = (name, email) => {
     const user = {name, email};

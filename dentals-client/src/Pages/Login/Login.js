@@ -2,35 +2,47 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
+//import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const {register, formState: { errors }, handleSubmit} = useForm();
     //setForgetPassword
     const {signIn, providerLogin, setLoading} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
-    //const [clientEmail, setClientEmail] = useState('');
-    const googleProvider = new GoogleAuthProvider();
-    let navigate = useNavigate();
-    let location = useLocation();
+    const [clientEmail, setClientEmail] = useState(''); 
+    const [token] = useToken(clientEmail);
+    //console.log('client Email', clientEmail);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
     
-    let from = location.state?.from?.pathname || "/";
+    if(token)
+    {
+        navigate(from, {to:'/'}, { replace: true });
+    }
+
+    const googleProvider = new GoogleAuthProvider();
  
     const handleLogin = data => {
         setLoginError('');
         signIn(data.email, data.password)
         .then(result => {
             const user = result.user;
-            if(user.emailVerified)
-            {
-                navigate(from, {to:'/'}, { replace: true });
-            }
-            else
-            {
-                toast.error('Your email is not verified.Please verify your email');
-            }
+        console.log(user.email);
+            setClientEmail(data.email);
+
+            // if(user.emailVerified)
+            // {
+            //     navigate(from, {to:'/'}, { replace: true });
+            // }
+            // else
+            // {
+            //     toast.error('Your email is not verified.Please verify your email');
+            // }
                 
             })
             .catch((error) => 
