@@ -39,6 +39,7 @@ async function run() {
       const appointOptionCollection = client.db("dentalPoint").collection("appointmentOptions");
       const bookingsCollection = client.db('dentalPoint').collection('bookings');
       const usersCollection = client.db('dentalPoint').collection('users');
+      const doctorsCollection = client.db("dentalPoint").collection("doctor");
 
       app.get('/appointmentOptions', async(req, res) => {
         const date = req.query.date;
@@ -109,7 +110,7 @@ async function run() {
       });
 
       app.put('/users/admin/:id', async(req,res)=>{
-        
+
         const id = req.params.id;
         const filter = { _id: ObjectId(id) };
         const options = { upsert: true };
@@ -119,6 +120,18 @@ async function run() {
           },
         };
         const result = await usersCollection.updateOne(filter, updateDoc, options);
+        res.send(result);
+      });
+
+      app.get("/appointmentSpecialty", async (req, res) => {
+        const query = {};
+        const result = await appointOptionCollection.find(query).project({ name: 1 }).toArray();
+        res.send(result);
+      });
+
+      app.post("/doctors", async (req, res) => {
+        const doctor = req.body;
+        const result = await doctorsCollection.insertOne(doctor);
         res.send(result);
       });
   }
