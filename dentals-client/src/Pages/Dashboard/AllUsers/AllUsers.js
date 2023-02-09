@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllUsers = () => {
+    const [deletingUser, setDeletingUser] = useState(null);
+
     const { data: users = [], refetch } = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
@@ -23,6 +26,21 @@ const AllUsers = () => {
             if (data.modifiedCount > 0) {
               toast.success("Admin made successfully.");
               refetch();
+            }
+          });
+      };
+      const handleDeleteDoctor = (user) => {
+        fetch(`http://localhost:5000/users/${user._id}`, {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              refetch();
+              toast.success(`User ${user.name} deleted successfully`);
             }
           });
       };
@@ -58,7 +76,12 @@ const AllUsers = () => {
                     )}
                   </td>
                   <td>
-                    <button className="btn btn-xs btn-error">Delete</button>
+                    <label
+                      onClick={() => setDeletingUser(user)}
+                      htmlFor="confirmation-modal"
+                      className="btn btn-xs btn-error">
+                      Delete
+                    </label>
                   </td>
                 </tr>
               ))}
@@ -66,6 +89,15 @@ const AllUsers = () => {
           </table>
         </div>
       </div>
+      {deletingUser && (
+        <ConfirmationModal
+          title={`Are you sure you want to delete?`}
+          message={`If you delete ${deletingUser.name}. It cannot be undone.`}
+          successAction={handleDeleteDoctor}
+          modalData={deletingUser}
+          successButtonName="Delete"
+        ></ConfirmationModal>
+      )}
     </div>
     );
 };
