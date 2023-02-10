@@ -14,7 +14,6 @@ const Login = () => {
     const [loginError, setLoginError] = useState('');
     const [clientEmail, setClientEmail] = useState(''); 
     const [token] = useToken(clientEmail);
-    //console.log('client Email', clientEmail);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -22,7 +21,7 @@ const Login = () => {
     
     if(token)
     {
-        navigate(from, {to:'/'}, { replace: true });
+        navigate(from, { replace: true });
     }
 
     const googleProvider = new GoogleAuthProvider();
