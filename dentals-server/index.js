@@ -42,6 +42,13 @@ async function run() {
       const usersCollection = client.db('dentalPoint').collection('users');
       const doctorsCollection = client.db("dentalPoint").collection("doctor");
       const paymentsCollection = client.db("dentalPoint").collection("payments");
+      const contactsCollection = client.db("dentalPoint").collection("contacts");
+
+      app.post("/contact", async (req, res) => {
+        const doctor = req.body;
+        const result = await contactsCollection.insertOne(doctor);
+        res.send(result);
+      });
 
       app.get('/appointmentOptions', async(req, res) => {
         const date = req.query.date;
