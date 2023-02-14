@@ -34,7 +34,10 @@ const ContactUs = () => {
                         {errors.subject && <p className='text-error'>{errors.subject.message}</p>}
                     </div>
                     <div className="form-control w-full max-w-xs">
-                    <textarea {...register("message")} className="textarea textarea-bordered text-black" placeholder="Your Message"></textarea>
+                    <textarea {...register("message", {
+                            required: "Message is Required"
+                        })} className="textarea textarea-bordered text-black" placeholder="Your Message"></textarea>
+                    {errors.message && <p className='text-error'>{errors.message.message}</p>}
                     </div>
                     <div className="mt-9 w-32 mx-auto"><PrimaryButton size='lg'>Submit</PrimaryButton></div>
                     {contactFormError && <p className='text-error'>{contactFormError}</p>}
